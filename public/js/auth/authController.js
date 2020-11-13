@@ -7,7 +7,7 @@ $(() => {
         const email = $('#emailContactoReg').val();
         const password = $('#passwordReg').val();
         // TODO : LLamar crear cuenta con email
-        const auth = Autenticacion()
+        const auth = new Autenticacion()
         auth.crearCuentaEmailPass(email, password, nombres)
     });
 
@@ -26,7 +26,7 @@ $(() => {
         $('#modalRegistro').modal('open');
     });
 
-    $('#btnIniciarSesion').click(() => {
+    $('#btnInicioSesion').click(() => {
         $('#modalRegistro').modal('close');
         $('#modalSesion').modal('open');
     });

@@ -14,10 +14,10 @@ class Autenticacion {
         })
 
         const configuracion = {
-          url : 'http://localhost:3000/'
+          url : 'http://localhost:3004/'
         }
 
-        result.user.sendEmailVerification()
+        result.user.sendEmailVerification(configuracion)
           .catch(error => {
             console.error(error)
             Materialize.toast(error.message, 4000)
