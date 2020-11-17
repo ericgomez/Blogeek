@@ -75,7 +75,14 @@ $(() => {
   })
 
   $('#btnMisPost').click(() => {
-    //$('#tituloPost').text('Mis Posts')
-    //Materialize.toast(`Debes estar autenticado para ver tus posts`, 4000)    
+    const user = firebase.auth().currentUser //Obtenemos el cache del Id del usuario logeado
+    if (user) {
+      const post = new Post()
+      post.consultarPostxUsuario(user.email)
+      $('#tituloPost').text('Mis Posts')
+
+    }  else {
+      Materialize.toast(`Debes estar autenticado para ver tus posts`, 4000)  
+    }
   })
 })

@@ -47,7 +47,27 @@ class Post {
   }
 
   consultarPostxUsuario (emailUser) {
-    
+    this.db.collection('post')
+    .where('autor', "==", emailUser)//Agregamos un where que valide el correo
+    .onSnapshot(querySnapshot => {
+        $('#posts').empty()
+        if (querySnapshot.empty) {
+            $('#posts').append(this.obtenerTemplatePostVacio())
+        } else {
+            querySnapshot.forEach(post => {
+                let postHtml = this.obtenerPostTemplate(//Mandamos llamara al metotodo
+                    post.data().emailUser,
+                    post.data().titulo,
+                    post.data().descripcion,
+                    post.data().videoLink,
+                    post.data().imagenLink,
+                    Utilidad.obtenerFecha(post.data().fecha.toDate())
+                
+                )
+                $('#posts').append(postHtml)
+            })
+        }
+    })
   }
 
   obtenerTemplatePostVacio () {
