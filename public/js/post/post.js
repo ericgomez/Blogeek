@@ -7,7 +7,7 @@ class Post {
   }
 
   crearPost (uid, emailUser, titulo, descripcion, imagenLink, videoLink) {
-    return this.db.collection("posts").add({
+    return this.db.collection("post").add({
         uid : uid,
         emailUser : emailUser,
         titulo : titulo,
@@ -25,7 +25,25 @@ class Post {
   }
 
   consultarTodosPost () {
-    
+    this.db.collection('post').onSnapshot(querySnapshot => {
+        $('#posts').empty()
+        if (querySnapshot.empty) {
+            $('#posts').append(this.obtenerTemplatePostVacio())
+        } else {
+            querySnapshot.forEach(post => {
+                let postHtml = this.obtenerPostTemplate(//Mandamos llamara al metotodo
+                    post.data().emailUser,
+                    post.data().titulo,
+                    post.data().descripcion,
+                    post.data().videoLink,
+                    post.data().imagenLink,
+                    Utilidad.obtenerFecha(post.data().fecha.toDate())
+                
+                )
+                $('#posts').append(postHtml)
+            })
+        }
+    })
   }
 
   consultarPostxUsuario (emailUser) {
