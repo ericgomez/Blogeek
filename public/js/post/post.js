@@ -25,7 +25,7 @@ class Post {
   }
 
   consultarTodosPost () {
-    this.db.collection('post').onSnapshot(querySnapshot => {
+    this.db.collection('posts').onSnapshot(querySnapshot => {
         $('#posts').empty()
         if (querySnapshot.empty) {
             $('#posts').append(this.obtenerTemplatePostVacio())
@@ -47,7 +47,7 @@ class Post {
   }
 
   consultarPostxUsuario (emailUser) {
-    this.db.collection('post')
+    this.db.collection('posts')
     .where('autor', "==", emailUser)//Agregamos un where que valide el correo
     .onSnapshot(querySnapshot => {
         $('#posts').empty()
