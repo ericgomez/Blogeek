@@ -7,7 +7,7 @@ class Post {
   }
 
   crearPost (uid, emailUser, titulo, descripcion, imagenLink, videoLink) {
-    return this.db.collection("post").add({
+    return this.db.collection("posts").add({
         uid : uid,
         emailUser : emailUser,
         titulo : titulo,
@@ -52,7 +52,7 @@ class Post {
   consultarPostxUsuario (emailUser) {
     this.db.collection('posts')
     .orderBy('fecha', 'asc')
-    .where('autor', "==", emailUser)//Agregamos un where que valide el correo
+    .where('emailUser', "==", emailUser)//Agregamos un where que valide el correo
     .onSnapshot(querySnapshot => {
         $('#posts').empty()
         if (querySnapshot.empty) {
