@@ -3,13 +3,41 @@ $(() => {
   $('.modal').modal()
 
   // TODO: Adicionar el service worker
+  navigator.serviceWorker
+    .register('notificaciones-sw.js')
+    .then(registro => {
+      console.log('service worker registrado')
+      firebase.messaging().useServiceWorker(registro)
+    })
+    .catch(error => {
+      console.error(`Error al registrar el service worker => ${error}`)
+    })
 
   // Init Firebase nuevamente
   firebase.initializeApp(firebaseConfig);
 
-  // TODO: Registrar LLave publica de messaging
+  // Registrar LLave publica de messaging
+  const messaging = firebase.messaging()
+  messaging.usePublicVapidKey(
+    'BHXn4lIH4wyUdCYZc_M8wLKzBm6Yyq1uIyVYVRS15sle36sdtofgKBSvKRJRhOAejS1em_Lu48lpSdmYjHxiulU'
+  )
 
-  // TODO: Solicitar permisos para las notificaciones
+  // Solicitar permisos para las notificaciones
+  messaging
+    .requestPermission()
+    .then(() => {
+      console.log('permiso otorgado')
+      return messaging.getToken()
+    })
+    .then(token => {
+      const db = firebase.firestore()
+      db.settings({ timestampsInSnapshots : true})
+      db.collection('tokens').doc(token).set({
+        token : token
+      }).catch(error => {
+        console.error(`Error al insertar el token en la base de datos => ${error}`)
+      })
+    })
 
   // TODO: Recibir las notificaciones cuando el usuario esta foreground
 
