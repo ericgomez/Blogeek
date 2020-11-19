@@ -7,4 +7,19 @@ firebase.initializeApp({
     messagingSenderId: "956898710949"
 })
 
+const messaging =firebase.messaging()
+
+messaging.setBackgroundMessageHandler(payload => {
+    const tituloNotificacion = "Ya tenemos un nievo post"
+    const opcionesNotificacion = {
+        body: payload.data.titulo,
+        icon: 'icons/icon_new_post.png',
+        click_action: "blogeek-87a99.firebaseapp.com"
+    }
+
+    return self.registration.showNotificacion(
+        tituloNotificacion,
+        opcionesNotificacion
+    )
+})
 
