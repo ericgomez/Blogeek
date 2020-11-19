@@ -17,7 +17,7 @@ messaging.setBackgroundMessageHandler(payload => {
         click_action: "blogeek-87a99.firebaseapp.com"
     }
 
-    return self.registration.showNotificacion(
+    return self.registration.showNotification(
         tituloNotificacion,
         opcionesNotificacion
     )

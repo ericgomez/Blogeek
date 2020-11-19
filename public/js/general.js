@@ -2,6 +2,9 @@ $(() => {
   $('.tooltipped').tooltip({ delay: 50 })
   $('.modal').modal()
 
+  // Init Firebase nuevamente
+  firebase.initializeApp(firebaseConfig);
+
   // TODO: Adicionar el service worker
   navigator.serviceWorker
     .register('notificaciones-sw.js')
@@ -12,9 +15,6 @@ $(() => {
     .catch(error => {
       console.error(`Error al registrar el service worker => ${error}`)
     })
-
-  // Init Firebase nuevamente
-  firebase.initializeApp(firebaseConfig);
 
   // Registrar LLave publica de messaging
   const messaging = firebase.messaging()
@@ -31,6 +31,8 @@ $(() => {
       return messaging.getToken()
     })
     .then(token => {
+      console.log("token")
+      console.log(token)
       const db = firebase.firestore()
       db.settings({ timestampsInSnapshots : true})
       db.collection('tokens').doc(token).set({
