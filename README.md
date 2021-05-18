@@ -1,4 +1,10 @@
-# Blogeek
+#  Curso de Firebase Cloud Functions
+#### Proyecto del curso
+
+![proyect](https://static.platzi.com/media/landing-projects/Proyecto-firebase-cloud-functions.png)
+
+## Blogeek functions
+Agrega notificaciones a tu blog Geek desarrollado en el curso de Firebase para la Web, agrega funciones de registro de usuarios, maneja analítica de tu sitio con Crashlytics, sube imágenes utilizando functions y escribe pruebas para asegurarte de mandar a producción Cloud Functions seguras y eficientes.
 
 _Plantilla web_
 
